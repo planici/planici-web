@@ -1,1 +1,95 @@
 @import "tailwindcss";
+
+:root {
+  --background: #e7f2f8;
+  --foreground: #121212;
+
+  --color-brand-pink-300: #d064a1;
+  --color-brand-pink-200: #e47bb3;
+  --color-brand-pink-100: #efa4c7;
+  --color-brand-blue-200: #b3d4e5;
+  --color-brand-blue-100: #e7f2f8;
+
+  --color-neutral-100: #e7f2f8;
+  --color-neutral-200: #dee6e8;
+  --color-neutral-300: #c3cccf;
+  --color-neutral-400: #a5b0b3;
+  --color-neutral-500: #8f999c;
+
+  --color-neutral-900: #121212;
+  --color-neutral-800: #1c1c1c;
+  --color-neutral-700: #2a2a2a;
+  --color-neutral-600: #535252;
+  --color-neutral-500-dark: #7c8084;
+
+  /* SEMANTIC */
+  --color-success-300: #dee6e8;
+  --color-success-400: #c3cccf;
+  --color-success-500: #a5b0b3;
+
+  --color-warning-300: #e8d16a;
+  --color-warning-400: #e4c23a;
+  --color-warning-500: #b08e00;
+
+  --color-error-300: #f29ca0;
+  --color-error-400: #e85a64;
+  --color-error-500: #b60f24;
+
+  /* BTNs */
+  --btn-background-100: #edf1f3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter-sans);
+}
+
+@theme {
+  --color-button-background-100: var(--btn-background-100);
+
+  --color-brand-pink-300: var(--brand-pink-300);
+  --color-brand-pink-200: var(--brand-pink-200);
+  --color-brand-pink-100: var(--brand-pink-100);
+  --color-brand-blue-200: var(--brand-blue-200);
+  --color-brand-blue-100: var(--brand-blue-100);
+
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-500-dark: var(--neutral-500-dark);
+
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+
+  --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400);
+  --color-warning-500: var(--warning-500);
+
+  --color-error-300: var(--error-300);
+  --color-error-400: var(--error-400);
+  --color-error-500: var(--error-500);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #010001;
+    --foreground: #e7f2f8;
+    --btn-background-100: #090909;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter-sans), Arial, Helvetica, sans-serif;
+}
