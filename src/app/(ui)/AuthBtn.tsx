@@ -1,13 +1,31 @@
-export default function AuthButton() {
+import { ReactNode, ButtonHTMLAttributes } from "react";
+import clsx from "clsx";
+
+interface AuthBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string;
+  icon?: ReactNode;
+}
+
+export default function AuthButton({
+  text,
+  icon,
+  className,
+  ...props
+}: AuthBtnProps) {
   return (
-    <button className='flex justify-center items-center gap-4 w-full h-12 rounded-lg border border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-all duration-150'>
-      {/* <Image
-                              src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/500px-Google_%22G%22_logo.svg.png'
-                              alt='googleIcon'
-                              width={20}
-                              height={20}
-                            /> */}
-      <span className='font-semibold'>Login with Google</span>
+    <button
+      className={clsx(
+        "flex justify-center items-center gap-3 w-full h-12 rounded-lg border border-neutral-700",
+        "bg-[#090909] hover:bg-neutral-900 transition-all duration-150",
+        "disabled:opacity-50 disabled:pointer-events-none",
+        className
+      )}
+      {...props}
+    >
+      {icon && (
+        <span className='flex size-7 items-center justify-center'>{icon}</span>
+      )}
+      <span className='font-semibold'>{text}</span>
     </button>
   );
 }

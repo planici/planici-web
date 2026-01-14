@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import AuthButton from "@/app/(ui)/AuthBtn";
 
 type PlanOption = "pro" | "trial";
 
@@ -211,26 +212,30 @@ export default function SignIn() {
                   <br /> Your account
                 </h1>
                 <div className='flex w-full flex-col gap-2'>
-                  <button className='flex justify-center items-center gap-4 w-full h-12 rounded-lg border border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-all duration-150'>
-                    <Image
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/500px-Google_%22G%22_logo.svg.png'
-                      alt='googleIcon'
-                      width={20}
-                      height={20}
-                    />
-                    <span className='font-semibold'>Login with Google</span>
-                  </button>
-                  <button className='flex justify-center items-center gap-4 w-full h-12 rounded-lg border border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-all duration-150'>
-                    <div className='size-8'>
+                  <AuthButton
+                    text='Continue with Google'
+                    aria-label='Sign in with Google'
+                    icon={
+                      <Image
+                        src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/500px-Google_%22G%22_logo.svg.png'
+                        alt='googleIcon'
+                        width={20}
+                        height={20}
+                      />
+                    }
+                  />
+                  <AuthButton
+                    text='Continue with Apple'
+                    aria-label='Sign Up With Google'
+                    icon={
                       <svg viewBox='0 0 16 16'>
                         <path
                           d='M12.4734 12.0221C11.92 12.8488 11.3334 13.6555 10.44 13.6688C9.54671 13.6888 9.26004 13.1421 8.24671 13.1421C7.22671 13.1421 6.91337 13.6555 6.06669 13.6888C5.19335 13.7221 4.53335 12.8088 3.97335 12.0021C2.83335 10.3555 1.96002 7.32213 3.13335 5.28213C3.71335 4.2688 4.75335 3.6288 5.88002 3.6088C6.73337 3.59547 7.54671 4.1888 8.07337 4.1888C8.59337 4.1888 9.58004 3.47547 10.6134 3.58214C11.0467 3.60214 12.26 3.75547 13.04 4.90213C12.98 4.94213 11.5934 5.75547 11.6067 7.44213C11.6267 9.4555 13.3734 10.1288 13.3934 10.1355C13.3734 10.1821 13.1134 11.0955 12.4734 12.0221ZM8.66671 1.35547C9.15337 0.80214 9.96004 0.38214 10.6267 0.35547C10.7134 1.13547 10.4 1.92214 9.93337 2.48214C9.47337 3.0488 8.71337 3.4888 7.96671 3.4288C7.86671 2.66214 8.24004 1.86214 8.66671 1.35547Z'
                           fill='currentColor'
                         ></path>
                       </svg>
-                    </div>
-                    <span className='font-semibold'>Login with Apple</span>
-                  </button>
+                    }
+                  />
                   <Link href='/' className='text-brand-pink-300 font-medium'>
                     Enter with email
                   </Link>
