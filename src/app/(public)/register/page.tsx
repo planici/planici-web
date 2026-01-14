@@ -12,7 +12,9 @@ type PlanOption = "pro" | "trial";
 export default function SignIn() {
   const [hasText, setHasText] = useState("");
   const [selectedPlan, setSelectedPlan] = useState<PlanOption | null>(null);
-  const [step, setStep] = useState<"plan" | "account">("plan");
+  const [step, setStep] = useState<"plan" | "account" | "continue-email">(
+    "plan"
+  );
 
   const toggleText = (e: ChangeEvent<HTMLInputElement>) => {
     setHasText(e.target.value);
@@ -20,11 +22,6 @@ export default function SignIn() {
 
   const nameInput = useRef<HTMLInputElement | null>(null);
   const canContinue = hasText.length > 0 && selectedPlan !== null;
-
-  const nextStep = () => {
-    setStep("account");
-    console.warn("salvar no db o nome do usuário");
-  };
 
   useEffect(() => {
     if (selectedPlan) {
@@ -163,7 +160,7 @@ export default function SignIn() {
                             ? `bg-neutral-100 text-neutral-900 hover:bg-neutral-300`
                             : ` bg-neutral-700 text-neutral-600`
                         )}
-                        onClick={nextStep}
+                        onClick={() => setStep("account")}
                       >
                         Continue
                       </button>
@@ -199,7 +196,7 @@ export default function SignIn() {
                   </Link>
                 </span>
               </motion.div>
-            ) : (
+            ) : step === "account" ? (
               <motion.div
                 key='account-creationg'
                 initial={{ opacity: 0, y: 8 }}
@@ -236,10 +233,57 @@ export default function SignIn() {
                       </svg>
                     }
                   />
-                  <Link href='/' className='text-brand-pink-300 font-medium'>
-                    Enter with email
-                  </Link>
+                  <div className='flex justify-center items-center gap-2 w-full mt-4'>
+                    <button
+                      onClick={() => setStep("continue-email")}
+                      className='flex gap-2 items-center text-brand-pink-300 font-medium border-box-border border-b border-[rgba(0,0,0,0)] hover:border-brand-pink-300!'
+                    >
+                      Enter with email
+                      <svg viewBox='0 0 16 16' width='16'>
+                        <path
+                          d='M9.53033 2.21968L9 1.68935L7.93934 2.75001L8.46967 3.28034L12.4393 7.25001H1.75H1V8.75001H1.75H12.4393L8.46967 12.7197L7.93934 13.25L9 14.3107L9.53033 13.7803L14.6036 8.70711C14.9941 8.31659 14.9941 7.68342 14.6036 7.2929L9.53033 2.21968Z'
+                          fill='currentColor'
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key='account-email'
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className='w-full flex flex-col items-center gap-6'
+              >
+                <h1 className='text-2xl text-center md:text-3xl text-neutral-300 font-semibold'>
+                  Sign up for Planici
+                </h1>
+                <input
+                  placeholder='Your email'
+                  ref={nameInput}
+                  className='px-2 w-full h-12 rounded-lg outline-none focus:outline-none focus:ring-3 focus:ring-neutral-600 transition-all duration-200 ease-out border border-neutral-700 hover:border-neutral-600 focus:border-neutral-400 text-neutral-300'
+                  autoComplete='name'
+                  onChange={toggleText}
+                  title='fill out this field'
+                />
+                <button
+                  className={clsx(
+                    `flex justify-center items-center w-full h-12 rounded-lg font-medium text-sm transition-all duration-150 ease-out`,
+                    canContinue
+                      ? `bg-neutral-100 text-neutral-900 hover:bg-neutral-300`
+                      : ` bg-neutral-700 text-neutral-600`
+                  )}
+                >
+                  Continue with Email
+                </button>
+                <button
+                  onClick={() => setStep("account")}
+                  className='flex gap-2 items-center text-brand-pink-300 font-medium border-box-border border-b border-[rgba(0,0,0,0)] hover:border-brand-pink-300!'
+                >
+                  Other Signup Options
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
