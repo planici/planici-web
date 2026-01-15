@@ -1,9 +1,19 @@
+'use client'
 import Image from "next/image";
-import Link from "next/link";
+import DButton from "@/app/(ui)/DefaultBtn";
 import SignHeader from "@/app/(ui)/sessions/header";
 import AuthButton from "@/app/(ui)/AuthBtn";
+import { useRouter } from "next/navigation";
+import { Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Login() {
+  const router = useRouter();
+
+  const ContinueEmail = () => {
+    router.push('/')
+  }
+
   return (
     <div className='w-dvw h-dvh relative bg-[#010001] text-[#e7f2f8]'>
       <SignHeader />
@@ -41,21 +51,14 @@ export default function Login() {
           </div>
           <form className='w-full flex flex-col gap-4 items-center'>
             {/* <h2 className=''>Enter with email</h2> */}
-            <label className='w-full'>
               <input
                 placeholder='email@planici.com'
                 autoComplete='email'
                 aria-autocomplete='inline'
                 className='w-full rounded-lg border border-neutral-700 bg-[#090909] h-12 px-3'
               />
-            </label>
-            <Link
-              href={`/`}
-              type='submit'
-              className='flex justify-center items-center gap-4 w-full h-12 rounded-lg border border-neutral-700 bg-foreground text-[#090909] hover:bg-foreground/90 transition-all duration-150'
-            >
-              Continue with Email
-            </Link>
+            <DButton text="Continue with Email" icon={<Mail size={16} />} onClick={() => ContinueEmail} className="font-semibold"/>
+            
           </form>
           <span>
             Don&apos;t have an account?{" "}

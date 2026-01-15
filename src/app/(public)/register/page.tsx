@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import AuthButton from "@/app/(ui)/AuthBtn";
+import DButton from "@/app/(ui)/DefaultBtn";
+import { Mail } from "lucide-react";
 
 type PlanOption = "pro" | "trial";
 
@@ -31,15 +33,10 @@ export default function SignIn() {
     }
   }, [selectedPlan]);
 
-  return (
-    <div className='w-dvw h-dvh relative bg-[#010001] text-[#e7f2f8]'>
-      <SignHeader />
-      {/* Nome Sobrenome CPF Email Numero(opc) Senha+Conf Nome_Empresa Tipo_Empresa Tamanho_Empresa  */}
-      <div className='w-full h-dvh flex justify-center items-center'>
-        <div className='w-2xl flex flex-col justify-center items-center gap-10 px-5 md:px-20 py-20 rounded-2xl border border-neutral-700 bg-[#090909] mx-4 md:m-0 text-sm md:text-base'>
-          <AnimatePresence mode='wait'>
-            {step === "plan" ? (
-              <motion.div
+  const renderStep = () => {
+    if (step == "plan") {
+      return (
+        <motion.div
                 key='plan-selection'
                 exit={{ opacity: 0, y: -8 }}
                 className='w-full flex flex-col items-center gap-10'
@@ -144,10 +141,10 @@ export default function SignIn() {
                   >
                     <div className='w-full flex flex-col gap-3'>
                       <label className='flex flex-col items-start gap-2 w-full text-neutral-600 hover:cursor-text'>
-                        Your Name
+                        Your Name{""}
                         <input
                           ref={nameInput}
-                          className='px-2 w-full h-12 rounded-lg outline-none focus:outline-none focus:ring-3 focus:ring-neutral-600 transition-all duration-200 ease-out border border-neutral-700 hover:border-neutral-600 focus:border-neutral-400 text-neutral-300'
+                          className='px-2 w-full h-12 rounded-lg outline-none focus:outline-none focus:ring-2 focus:ring-neutral-600 transition-all duration-200 ease-out border border-neutral-700 hover:border-neutral-600 focus:border-neutral-400 text-neutral-300'
                           autoComplete='name'
                           onChange={toggleText}
                           title='fill out this field'
@@ -192,12 +189,15 @@ export default function SignIn() {
                     href={`/sign-in`}
                     className='text-neutral-300 font-medium transition-all duration-200 hover:text-neutral-500'
                   >
-                    Sign up
+                    Sign in
                   </Link>
                 </span>
               </motion.div>
-            ) : step === "account" ? (
-              <motion.div
+      );
+    }
+    if (step === "account") {
+      return (
+        <motion.div
                 key='account-creationg'
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -236,7 +236,7 @@ export default function SignIn() {
                   <div className='flex justify-center items-center gap-2 w-full mt-4'>
                     <button
                       onClick={() => setStep("continue-email")}
-                      className='flex gap-2 items-center text-brand-pink-300 font-medium border-box-border border-b border-[rgba(0,0,0,0)] hover:border-brand-pink-300!'
+                      className='flex gap-2 items-center text-brand-pink-300 font-medium border-box-border border-b border-[rgba(0,0,0,0)] hover:border-brand-pink-300'
                     >
                       Enter with email
                       <svg viewBox='0 0 16 16' width='16'>
@@ -249,8 +249,10 @@ export default function SignIn() {
                   </div>
                 </div>
               </motion.div>
-            ) : (
-              <motion.div
+      );
+    }
+    return (
+      <motion.div
                 key='account-email'
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -263,21 +265,12 @@ export default function SignIn() {
                 <input
                   placeholder='Your email'
                   ref={nameInput}
-                  className='px-2 w-full h-12 rounded-lg outline-none focus:outline-none focus:ring-3 focus:ring-neutral-600 transition-all duration-200 ease-out border border-neutral-700 hover:border-neutral-600 focus:border-neutral-400 text-neutral-300'
+                  className='px-2 w-full h-12 rounded-lg outline-none focus:outline-none focus:ring-2 focus:ring-neutral-600 transition-all duration-200 ease-out border border-neutral-700 hover:border-neutral-600 focus:border-neutral-400 text-neutral-300'
                   autoComplete='name'
                   onChange={toggleText}
                   title='fill out this field'
                 />
-                <button
-                  className={clsx(
-                    `flex justify-center items-center w-full h-12 rounded-lg font-medium text-sm transition-all duration-150 ease-out`,
-                    canContinue
-                      ? `bg-neutral-100 text-neutral-900 hover:bg-neutral-300`
-                      : ` bg-neutral-700 text-neutral-600`
-                  )}
-                >
-                  Continue with Email
-                </button>
+                <DButton text="Continue with Email" icon={<Mail size={16} />} />
                 <button
                   onClick={() => setStep("account")}
                   className='flex gap-2 items-center text-brand-pink-300 font-medium border-box-border border-b border-[rgba(0,0,0,0)] hover:border-brand-pink-300!'
@@ -285,7 +278,17 @@ export default function SignIn() {
                   Other Signup Options
                 </button>
               </motion.div>
-            )}
+    )
+  }
+
+  return (
+    <div className='w-dvw h-dvh relative bg-[#010001] text-[#e7f2f8]'>
+      <SignHeader />
+      {/* Nome Sobrenome CPF Email Numero(opc) Senha+Conf Nome_Empresa Tipo_Empresa Tamanho_Empresa  */}
+      <div className='w-full h-dvh flex justify-center items-center'>
+        <div className='w-2xl flex flex-col justify-center items-center gap-10 px-5 md:px-20 py-20 rounded-2xl border border-neutral-700 bg-[#090909] mx-4 md:m-0 text-sm md:text-base'>
+          <AnimatePresence mode='wait'>
+            {renderStep()}
           </AnimatePresence>
         </div>
       </div>

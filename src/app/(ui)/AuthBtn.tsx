@@ -11,7 +11,7 @@ export default function AuthButton({
   icon,
   className,
   ...props
-}: AuthBtnProps) {
+}: Readonly<AuthBtnProps>) {
   return (
     <button
       className={clsx(
