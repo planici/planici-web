@@ -7,6 +7,36 @@ export default function Dashboard() {
   return (
     <div className='w-dvw h-dvh bg-background text-foreground'>
       {/* <Sidebar /> */}
+      <div className='hidden lg:flex w-64 h-dvh gap-3 py-3 px-4 bg-neutral-200 absolute top-0 left-0'>
+        {/* text */}
+        <div className='flex justify-between items-center w-full px-4 py-2'>
+          {/* elft */}
+          <div className='flex min-w-0 flex-1 gap-3 items-center justify-start'>
+            {/* Pfp group */}
+            <div className='relative'>
+              {/* TODO:CHANGE THIS */}
+              <div className='size-10 rounded-lg bg-black/50 dark:bg-white/50'></div>
+              {/* <Image src={'/'} alt="pfp" className="size-10 rounded-lg"/> */}
+            </div>
+            <span className='font-semibold hidden lg:block text-ellipsis truncate min-w-0'>
+              Username Username
+            </span>
+          </div>
+          <SquarePen className='text-foreground hidden lg:block' />
+          {/* Agendamento */}
+          <button className='px-3 py-2 gap-2 flex items-center justify-center rounded-lg font-medium text-[#f7f7f7] bg-brand-pink-200 lg:hidden'>
+            Agendamento
+            <ChevronDown />
+          </button>
+        </div>
+        {/* Header */}
+        <div className='lg:hidden'></div>
+        {/* options */}
+        <div className='flex flex-col justify-between items-start'>
+          {/* top */}
+          <div className='flex flex-col gap-3 flex-1'></div>
+        </div>
+      </div>
       {/* Content */}
       <div className='w-full h-full flex flex-col lg:pl-64 lg:pt-2'>
         {/* text */}
@@ -32,7 +62,7 @@ export default function Dashboard() {
         </div>
         {/* Content-Header */}
         <div className='flex w-full justify-between items-center px-4 py-2'>
-          <h1 className='font-semibold lg:text-2xl lg:size-fit'>
+          <h1 className='font-semibold lg:text-3xl lg:size-fit'>
             Agendamentos da Semana
           </h1>
           <button className='px-3 py-1.5 bg-brand-pink-200 text-[#f7f7f7] rounded-lg font-medium lg:hidden'>
