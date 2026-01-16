@@ -7,6 +7,7 @@ const publicRoutes = [
 ] as const
 
 const REDIRECT_WHEN_NOT_ATHENTICATED = "/sign-in"
+const REDIRECT_WHEN_AUTHENTICATED = "/my-day"
 
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname
@@ -25,12 +26,12 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(redirectUrl)
     }
 
-    if (authToken && publicRoute && publicRoute.whenAuthenticated === "redirect") {
+    if (authToken && publicRoute?.whenAuthenticated === "redirect") {
         const redirectUrl = request.nextUrl.clone()
 
-        redirectUrl.pathname = REDIRECT_WHEN_NOT_ATHENTICATED
+        redirectUrl.pathname = REDIRECT_WHEN_AUTHENTICATED
 
-        return NextResponse.redirect("/")
+        return NextResponse.redirect(redirectUrl)
     }
 
     if (authToken && !publicRoute) {
