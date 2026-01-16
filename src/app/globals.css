@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e7f2f8;
+  --background: linear-gradient(
+    to bottom,
+    #f6f6f6 0%,
+    #f7f7f7 50%,
+    #f8f8f8 100%
+  );
   --foreground: #121212;
 
   --color-brand-pink-300: #d064a1;
